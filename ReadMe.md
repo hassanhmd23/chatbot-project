@@ -13,11 +13,46 @@ Ensure you have the following installed on your system:
 - **PHP** (v8.2 or later)
 - **Composer**
 - **PostgreSQL**
+- **Docker**
 - **Expo CLI** (for the mobile app)
 
 ---
 
-## Backend Setup (Laravel API)
+## Backend Docker Setup (Laravel API)
+
+1. **Navigate to the backend directory**:
+   ```bash
+   cd chatbot-backend
+   ```
+2. **Build the docker image**:
+   ```bash
+   docker-compose up --build
+   ```
+3. **Run Database Migration**:
+   ```bash
+   docker compose exec app php artisan migrate
+   ```
+4. **Change the localhost APP_URL value in .env to your IP address**
+5. **Link your storage to the public folder**:
+   ```bash
+   docker compose exec app php artisan storage:link
+   ```
+6. **Populate the chunks table with the traffic law**:
+   ```bash
+   docker compose exec app php artisan app:chunk-data
+   ```
+
+### Run the server after setup
+To run the server again after shutting it down, do the following steps:
+
+1. **Change the localhost APP_URL value in .env to your IP address**
+2. **Open Docker Desktop**
+3. **Navigate to Containers**
+4. **Run the chatbot-backend container**
+
+---
+
+## Backend Local Setup (Laravel API)
 
 1. **Navigate to the backend directory**:
    ```bash
