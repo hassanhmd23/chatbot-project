@@ -35,6 +35,8 @@ class ChunkData extends Command
         $page_number = 1;
         $chunked_chunks = ChunkTextService::handle($text);
 
+        $this->info("Chunking data and inserting them...");
+
         foreach ($chunked_chunks as $chunkSection => $chunkContent) {
 
             try {
@@ -60,10 +62,11 @@ class ChunkData extends Command
                     'embedding_1536' => $results->embeddings[0]->embedding,
                 ]);
 
+
             } catch (\Exception $e) {
                 Log::error('Error parsing Text', ['error' => $e->getMessage()]);
             }
-
         }
+        $this->info("Data has been chunked and inserted to the database");
     }
 }
